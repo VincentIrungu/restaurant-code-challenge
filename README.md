@@ -68,6 +68,6 @@ This project is licensed under the [MIT License](LICENSE.md) - see the [LICENSE.
 
 ## Acknowledgments
 
-- I love to acknowledge Moringa School Limited's Technical Mentor for the proficient teaching and guidance on key Python concepts.
+- I love to acknowledge Moringa School Limited's Technical Mentor: Senior Engineer Steve Otieno for the proficient teaching and guidance on key Python concepts. He has been a great revolutionarist who has impacted all prerequisite Python concepts in a totally efficient and technical fahion. Being my first sql Alchemy project, I am super grateful.
 
 Feel free to explore and enhance the capabilities of Barister-Meal Finder for your unique project needs!
