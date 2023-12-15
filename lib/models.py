@@ -72,7 +72,7 @@ class Customer(Base):
         return f'<Customer {self.first_name} {self.last_name}>'
 
 
-"""class Review(Base):
+class Review(Base):
     __tablename__='reviews'
     id=Column(Integer(),primary_key=True)
     rating=Column(Float())
@@ -92,12 +92,12 @@ class Customer(Base):
         return f"Review for {self.restaurant} by {self.customer}: {self.rating} stars."
 
     def __repr__(self):
-        return f'< Review {self.rating}>'"""
+        return f'< Review {self.rating}>'
 
 
   
     
-"""restaurants_customers=Table(
+restaurants_customers=Table(
     'restaurants_customers',
     Base.metadata,
     Column('restaurant_id', ForeignKey('restaurants.id'), primary_key=True),
@@ -105,7 +105,7 @@ class Customer(Base):
     extend_existing=True,
 )
    
-"""
+
    
 
 engine=create_engine('sqlite:///restaurants.db')
@@ -114,3 +114,58 @@ Base.metadata.create_all(engine)
 Session=sessionmaker(bind=engine)
 session=Session()
 
+
+retrieved_review= session.query(Review).filter_by(id=1).first()
+review_customer=retrieved_review.customer_review()
+print(f"Customer who left review 1:{review_customer}")
+
+retrieved_review1 = session.query(Review).filter_by(id=1).first()
+review_restaurant=retrieved_review1.restaurant_review()
+print(f"Restaurant that was rated in review 1:{review_restaurant}")
+
+restaurant_reviews=session.query(Restaurant).filter_by(id=1).first()
+restaurant1_reviews=restaurant_reviews.all_restaurants_reviews()
+for  review in restaurant1_reviews:
+    print(f'Reviews for restaurant 1: {review.rating}')
+
+restaurant_customers=session.query(Restaurant).filter_by(id=1).first()
+restaurant1_customers=restaurant_customers.all_restaurant_customers()
+for  customer in restaurant1_customers:
+    print(f'Restaurant 1 customers: {customer}')
+
+reviews_for_customer=session.query(Customer).filter_by(id=3).first()
+reviews_for_customer3=reviews_for_customer.all_customer_reviews()
+for review in reviews_for_customer3:
+    print(f"Reviews left by Customer 3: {review}")
+
+restaurants_for_customer=session.query(Customer).filter_by(id=3).first()
+customer3_restaurants=restaurants_for_customer.all_customers_restaurants()
+for restaurant in customer3_restaurants:
+   print(f"Customer 3 retaurants: {restaurant.name}")
+
+newCustomer=Customer("Angela","Mithi")
+print(f"Concatenated name: {newCustomer.full_name()}")
+
+fav_restaurant=session.query(Customer).filter_by(id=5).first()
+customer5_fav_restaurant=fav_restaurant.favorite_restaurant()
+print(f"Customer 5 favorite restaurant is:{customer5_fav_restaurant}")
+
+session.query(Review).filter_by(restaurant_id=6).delete()
+session.commit()
+restaurant7=session.query(Restaurant).filter_by(id=7).first()
+customer9=session.query(Customer).filter_by(id=9).first()
+customer9.add_review(restaurant7, 6.5)
+
+restaurant8=session.query(Restaurant).filter_by(id=8).first()
+customer7=session.query(Customer).filter_by(id=7).first()
+customer7.delete_reviews(restaurant8)
+
+print_full_review=session.query(Review).filter_by(id=10).first()
+print(print_full_review.full_review())
+
+fanciest_restaurant = Restaurant.fanciest()
+print(f"The fanciest restaurant is:{fanciest_restaurant}")
+
+restaurant3=session.query(Restaurant).filter_by(id=3).first()
+restaurant3.full_restaurant_reviews()
+print(restaurant3.full_restaurant_reviews())

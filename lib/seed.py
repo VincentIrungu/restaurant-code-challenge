@@ -1,104 +1,141 @@
-from models import Restaurant, Customer, Review,session
+#seed.py
+from models import Restaurant, Customer, Review,restaurants_customers,session
 
-"""data = [{
+session.query(Restaurant).delete()
+session.query(Customer).delete()
+session.query(Review).delete()
+session.query(restaurants_customers).delete()
+
+session.commit()
+
+restaurants_info=[
+  {
+    "id": 1,
+    "name": "Delicious Delights",
+    "price": 25.50
+  },
+  {
+    "id": 2,
+    "name": "Savory Spices",
+    "price": 18.75
+  },
+  {
+    "id": 3,
+    "name": "Gourmet Grains",
+    "price": 32.99
+  },
+  {
+    "id": 4,
+    "name": "Culinary Corner",
+    "price": 21.25
+  },
+  {
+    "id": 5,
+    "name": "Tasty Treats",
+    "price": 27.80
+  },
+  {
+    "id": 6,
+    "name": "Flavorful Fusion",
+    "price": 35.45
+  },
+  {
+    "id": 7,
+    "name": "Epicurean Eats",
+    "price": 29.00
+  },
+  {
+    "id": 8,
+    "name": "Palate Pleasers",
+    "price": 23.65
+  },
+  {
+    "id": 9,
+    "name": "Mouthwatering Morsels",
+    "price": 19.99
+  },
+  {
+    "id": 10,
+    "name": "Sizzling Sustenance",
+    "price": 26.75
+  }
+]
+session.add_all([Restaurant(**restaurant) for restaurant  in restaurants_info])
+session.commit()
+
+customers_info=[{
   "id": 1,
-  "name": "Alain Giannoni",
-  "price": 94
+  "first_name": "Nananne",
+  "last_name": "Stearnes"
 }, {
   "id": 2,
-  "name": "Cordy Hriinchenko",
-  "price": 4
+  "first_name": "Marietta",
+  "last_name": "Maslin"
 }, {
   "id": 3,
-  "name": "Ailene Duguid",
-  "price": 59
+  "first_name": "Jolynn",
+  "last_name": "Hacket"
 }, {
   "id": 4,
-  "name": "Deonne Dabes",
-  "price": 24
+  "first_name": "Boniface",
+  "last_name": "Meiklem"
 }, {
   "id": 5,
-  "name": "Muffin Bogies",
-  "price": 89
+  "first_name": "Hillery",
+  "last_name": "Kaye"
 }, {
   "id": 6,
-  "name": "Koralle Havelin",
-  "price": 100
+  "first_name": "Giacopo",
+  "last_name": "Crannage"
 }, {
   "id": 7,
-  "name": "Berti Kezor",
-  "price": 82
+  "first_name": "Stormie",
+  "last_name": "Caldwall"
 }, {
   "id": 8,
-  "name": "Gabriellia Langland",
-  "price": 65
+  "first_name": "Briney",
+  "last_name": "Traill"
 }, {
   "id": 9,
-  "name": "Kelli Britch",
-  "price": 36
+  "first_name": "Nonie",
+  "last_name": "Moat"
+}, {
+  "id": 10,
+  "first_name": "Merridie",
+  "last_name": "Innerstone"
 }]
-
-restaurants = []
-
-for datum in data:
-    brst =Restaurant(**datum)
-    restaurants.append(brst)
-
-
-session.add_all(restaurants)
+session.add_all([Customer(**customer) for customer  in customers_info])
 session.commit()
-print("Good work Vincent restaurant's data seeded succesfully. Check your table")
-"""
 
-data = [{
-  "id": 1,
-  "first_name": "Dierdre",
-  "last_name": "Gladyer"
-}, {
-  "id": 2,
-  "first_name": "Frederick",
-  "last_name": "Newitt"
-}, {
-  "id": 3,
-  "first_name": "Martita",
-  "last_name": "Fullerd"
-}, {
-  "id": 4,
-  "first_name": "Nady",
-  "last_name": "Key"
-}, {
-  "id": 5,
-  "first_name": "Darin",
-  "last_name": "Pieroni"
-}, {
-  "id": 6,
-  "first_name": "Agustin",
-  "last_name": "Cassell"
-}, {
-  "id": 7,
-  "first_name": "Juanita",
-  "last_name": "Fargie"
-}, {
-  "id": 8,
-  "first_name": "Ronny",
-  "last_name": "Crawford"
-}, {
-  "id": 9,
-  "first_name": "Ursola",
-  "last_name": "Dykas"
-}]
-
-customers = []
-
-for datum in data:
-    brst=Customer(**datum)
-    customers.append(brst)
-
-session.add_all(customers)
+review_info=[
+  {"id": 1, "rating": 4.3, "customer_id": 3, "restaurant_id": 7},
+  {"id": 2, "rating": 5.0, "customer_id": 8, "restaurant_id": 2},
+  {"id": 3, "rating": 3.7, "customer_id": 5, "restaurant_id": 9},
+  {"id": 4, "rating": 4.8, "customer_id": 2, "restaurant_id": 4},
+  {"id": 5, "rating": 2.5, "customer_id": 10, "restaurant_id": 6},
+  {"id": 6, "rating": 4.1, "customer_id": 1, "restaurant_id": 3},
+  {"id": 7, "rating": 3.9, "customer_id": 9, "restaurant_id": 8},
+  {"id": 8, "rating": 4.5, "customer_id": 4, "restaurant_id": 1},
+  {"id": 9, "rating": 2.8, "customer_id": 7, "restaurant_id": 5},
+  {"id": 10, "rating": 4.0, "customer_id": 6, "restaurant_id": 10}
+]
+session.add_all([Review(**review) for review in review_info])
 session.commit()
-print("Good work Vincent customer's data seeded succesfully. Check your table")
-
-
-
-
+data=[
+  {"id": 1, "restaurant_id": 5, "customer_id": 3},
+  {"id": 2, "restaurant_id": 8, "customer_id": 7},
+  {"id": 3, "restaurant_id": 2, "customer_id": 1},
+  {"id": 4, "restaurant_id": 6, "customer_id": 9},
+  {"id": 5, "restaurant_id": 3, "customer_id": 2},
+  {"id": 6, "restaurant_id": 9, "customer_id": 8},
+  {"id": 7, "restaurant_id": 1, "customer_id": 4},
+  {"id": 8, "restaurant_id": 7, "customer_id": 6},
+  {"id": 9, "restaurant_id": 4, "customer_id": 10},
+  {"id": 10, "restaurant_id": 10, "customer_id": 5}
+]
+for entry in data:
+    restaurant = session.query(Restaurant).filter_by(id=entry["restaurant_id"]).first()
+    customer = session.query(Customer).filter_by(id=entry["customer_id"]).first()
+    restaurant.customers.append(customer)
+session.commit()
 
