@@ -59,8 +59,8 @@ Barister-Meal Finder is a Python application built using SQLAlchemy, offering ef
 
 ## Contributors
 
-- [Your Name]
-- [Other Contributors, if any]
+- [Vincent Irungu Rugundu]
+
 
 ## License
 
